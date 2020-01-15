@@ -1,0 +1,44 @@
+﻿@model ShopStudy.Models.WorkerModel
+@{
+    ViewData["Title"] = "WorkerDetails";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WorkerDetails</title>
+</head>
+<body>
+    <table class="table table-bordered">
+
+        <tr>
+            <td>Id</td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Фамилия</td>
+            <td>@Model.SurName</td>
+        </tr>
+        <tr>
+            <td>Имя</td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td>Зарплата</td>
+            <td>@Model.Salary</td>
+        </tr>
+        <tr>
+            <td>Возраст</td>
+            <td>@Model.Age</td>
+        </tr>
+        <tr>
+            <td>Пол</td>
+            <td>@Model.Sex</td>
+        </tr>
+</table>
+    @Html.ActionLink("Вернуться назад", "Workers")
+    @Html.ActionLink("Вернуться на главную", "Index", "Home")
+</body>
+</html>

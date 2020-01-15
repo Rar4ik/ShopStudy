@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ShopStudy.Models.WorkerModel>
+
+@{
+    ViewData["Title"] = "Workers";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Workers</title>
+</head>
+<body>
+    @foreach(var item in Model)
+    {
+    <ol>
+        <li>@Html.ActionLink(item.FirstName, "WorkerDetails", new { id = item.Id }) @item.SurName</li>
+        <li>Возраст: @item.Age</li>
+    </ol>
+    }
+
+@Html.ActionLink("Вернуться назад", "Index","Home")
+</body>
+</html>
