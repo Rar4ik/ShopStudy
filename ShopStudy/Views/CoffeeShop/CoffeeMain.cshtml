@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ShopStudy.Models.CoffeeShopModel>
+@{
+    ViewData["Title"] = "CoffeMain";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CoffeMain</title>
+</head>
+<body>
+    <header style="color: brown">Coffee Shop with all you favorite flavors</header>
+
+    @foreach (var item in Model)
+    {
+        <ol>
+            <li>@Html.ActionLink(item.ProductName, "CoffeeDetails", new {id = item.Id})</li>
+            <li>Sort: @item.ProductCategory</li>
+            <li>@item.ProductRating stars</li>
+        </ol>
+    }
+@Html.ActionLink("Вернуться назад", "Index", "Home")
+</body>
+</html>

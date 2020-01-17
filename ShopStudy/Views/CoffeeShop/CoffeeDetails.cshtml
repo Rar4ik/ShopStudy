@@ -1,0 +1,44 @@
+﻿@model ShopStudy.Models.CoffeeShopModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CoffeeDetails</title>
+</head>
+<body>
+    <table class="table-bordered">
+        <tr>
+            <td>Product name is: </td>
+            <td  style="color: brown">@Model.ProductName</td>
+        </tr>
+        <tr>
+            <td>Category: </td>
+            <td  style="color: brown">@Model.ProductCategory</td>
+        </tr>
+        <tr>
+            <td>Average rating: </td>
+            <td style="color: brown">@Model.ProductRating stars</td>
+        </tr>
+        <tr>
+            <td>Price: </td>
+            <td style="color: brown">@Model.ProductCost $</td>
+        </tr>
+        <tr>
+            <td>Christmas Sale: </td>
+            <td style="color: brown">@Model.ProductSale %</td>
+        </tr>
+        <tr>
+            <td>Located on the following storage: </td>
+            <td style="color: brown">@Model.Storage</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Вернуться назад", "CoffeeMain")
+@Html.ActionLink("Вернуться на главную", "Index", "Home")
+
+</body>
+</html>
