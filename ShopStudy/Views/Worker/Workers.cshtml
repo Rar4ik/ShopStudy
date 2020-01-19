@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShopStudy.Models.WorkerModel>
+﻿@model IEnumerable<WorkerModel>
 
 @{
     ViewData["Title"] = "Workers";
@@ -11,14 +11,16 @@
     <title>Workers</title>
 </head>
 <body>
-    @foreach(var item in Model)
-    {
-    <ol>
-        <li>@Html.ActionLink(item.FirstName, "WorkerDetails", new { id = item.Id }) @item.SurName</li>
-        <li>Возраст: @item.Age</li>
-    </ol>
-    }
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <ol>
+                <li>@Html.ActionLink(item.FirstName, "WorkerDetails", new { id = item.Id }) @item.SurName</li>
+                <li>Возраст: @item.Age</li>
+            </ol>
+        }
 
-@Html.ActionLink("Вернуться назад", "Index","Home")
+        @Html.ActionLink("Вернуться назад", "Index", "Home")
+    </div>
 </body>
 </html>
