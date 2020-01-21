@@ -1090,9 +1090,10 @@ h2.title {
   padding-bottom: 45px;
 }
 
-#advertisement img {
-  width: 100%;
-}
+    #advertisement img {
+        height: 380px;
+        width: 100%;
+    }
 
 .pagination {
   display: inline-block;
