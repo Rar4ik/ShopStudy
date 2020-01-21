@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Views\ClothesShop\BlogSingle.cshtml" />
+    <None Include="Views\ClothesShop\Blog.cshtml" />
+    <None Include="Views\ClothesShop\Cart.cshtml" />
+    <None Include="Views\ClothesShop\Checkout.cshtml" />
+    <None Include="Views\ClothesShop\ContactUs.cshtml" />
+    <None Include="Views\ClothesShop\Login.cshtml" />
+    <None Include="Views\ClothesShop\NotFoundAction.cshtml" />
+    <None Include="Views\ClothesShop\ProductDetails.cshtml" />
+    <None Include="Views\ClothesShop\Shop.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.4.1" />
     <PackageReference Include="EntityFramework" Version="6.4.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
