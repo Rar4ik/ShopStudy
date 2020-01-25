@@ -11,7 +11,7 @@ namespace ShopStudy.Controllers
 {
     public class CoffeeShopController : Controller
     {
-        private List<CoffeeShopModel> GetCoffeeShopData()
+        private List<CoffeeShopViewModel> GetCoffeeShopData()
         {
             CoffeeShopData coffeeShop = new CoffeeShopData();
             var coffeeShopData = coffeeShop.SendCoffeeShopData();

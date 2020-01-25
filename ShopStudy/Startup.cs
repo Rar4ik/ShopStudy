@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShopStudy.Infrastructure.Implementation;
+using ShopStudy.Infrastructure.Interfaces;
 
 namespace ShopStudy
 {
@@ -17,6 +19,8 @@ namespace ShopStudy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSingleton<ICrud, InMemoryWorkerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -27,7 +31,6 @@ namespace ShopStudy
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -36,6 +39,7 @@ namespace ShopStudy
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

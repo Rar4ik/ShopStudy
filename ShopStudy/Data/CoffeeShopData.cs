@@ -8,12 +8,12 @@ namespace ShopStudy.Data
 {
     public class CoffeeShopData
     {
-        private readonly List<CoffeeShopModel> _coffeeShop = new List<CoffeeShopModel>();
+        private readonly List<CoffeeShopViewModel> _coffeeShop = new List<CoffeeShopViewModel>();
 
         public CoffeeShopData()
         {
             _coffeeShop.Add(
-                new CoffeeShopModel
+                new CoffeeShopViewModel
                 {
                     Id = 1,
                     ProductCategory = "Arabica",
@@ -24,7 +24,7 @@ namespace ShopStudy.Data
                     Storage = "Himki"
                 });
             _coffeeShop.Add(
-                new CoffeeShopModel
+                new CoffeeShopViewModel
                 {
                     Id = 2,
                     ProductCategory = "Robusta",
@@ -35,7 +35,7 @@ namespace ShopStudy.Data
                     Storage = "Schelkovo"
                 });
             _coffeeShop.Add(
-                new CoffeeShopModel
+                new CoffeeShopViewModel
                 {
                     Id = 3,
                     ProductCategory = "Arabica",
@@ -48,7 +48,7 @@ namespace ShopStudy.Data
 
         }
 
-        public List<CoffeeShopModel> SendCoffeeShopData()
+        public List<CoffeeShopViewModel> SendCoffeeShopData()
         {
             return _coffeeShop;
         }

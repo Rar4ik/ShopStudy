@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ShopStudy.Models
 {
-    public class WorkerModel
+    public class WorkerViewModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -1,26 +1,30 @@
-﻿@model IEnumerable<WorkerModel>
+﻿@model IEnumerable<WorkerViewModel>
 
 @{
     ViewData["Title"] = "Workers";
 }
 <!DOCTYPE html>
 
-<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Workers</title>
 </head>
-<body>
-    <div class="container">
-        @foreach (var item in Model)
-        {
-            <ol>
-                <li>@Html.ActionLink(item.FirstName, "WorkerDetails", new { id = item.Id }) @item.SurName</li>
-                <li>Возраст: @item.Age</li>
-            </ol>
-        }
+<div class="container">
 
-        @Html.ActionLink("Вернуться назад", "Index", "Home")
-    </div>
-</body>
-</html>
+@foreach (var item in Model)
+{
+<ol>
+    <li><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></li>
+    <li>@Html.ActionLink(item.FirstName, "WorkerDetails", new { id = item.Id }) @item.SurName</li>
+    <li>Возраст: @item.Age</li>
+    <li><a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-warning">Delete</a></li>
+</ol>
+}
+</div>
+
+<div class="container">
+    <a asp-action="Edit" class="btn btn-success">Add</a>
+</div>
+<div class="container">
+    @Html.ActionLink("Вернуться назад", "Index", "Home")
+</div>

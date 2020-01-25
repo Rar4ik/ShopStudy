@@ -4,30 +4,83 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShopStudy.Data;
+using ShopStudy.Infrastructure.Implementation;
+using ShopStudy.Infrastructure.Interfaces;
 using ShopStudy.Models;
 
 namespace ShopStudy.Controllers
 {
+    [Route("Employees")]
     public class WorkerController : Controller
     {
-        private List<WorkerModel> GetWorkers()
+        //Инициализация
+        #region 
+        private ICrud _employeesSercvice;
+        public WorkerController(ICrud crud)
         {
-            WorkerData workerData = new WorkerData();
-            var gettingWorkers = workerData.SendWorkersData();
-            return gettingWorkers;
+            _employeesSercvice = (InMemoryWorkerService)crud;
         }
+        #endregion
         
+        [HttpGet]
+        [Route("all")]
         public IActionResult Workers()
         {
-            return View(GetWorkers());
+            var worker = _employeesSercvice;
+            return View(worker.GetAll());
         }
 
+        [HttpGet]
+        [Route("{id}")]
         public IActionResult WorkerDetails(int id)
         {
-            var worker = GetWorkers().FirstOrDefault(x => x.Id == id);
+            var worker = _employeesSercvice.GetById(id);
             if (worker == null)
                 return NotFound();
             return View(worker);
+        }
+
+        [HttpGet]
+        [Route("Edit/{id?}")]
+        public IActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+                return View(new WorkerViewModel());
+            var viewModel = _employeesSercvice.GetById(id.Value);
+            if (viewModel == null)
+                return NotFound();
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        [Route("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            _employeesSercvice.Delete(id);
+            return RedirectToAction(nameof(Workers));
+        }
+        [HttpPost]
+        [Route("Edit/{id?}")]
+        public IActionResult Edit(WorkerViewModel model)
+        {
+            if (model.Id > 0)
+            {
+                var dbItem = _employeesSercvice.GetById(model.Id) as WorkerViewModel;
+
+                if (ReferenceEquals(dbItem, null))
+                    return NotFound();
+                dbItem.FirstName = model.FirstName;
+                dbItem.SurName = model.SurName;
+                dbItem.Age = model.Age;
+                dbItem.Sex = model.Sex;
+                dbItem.Salary = model.Salary;
+            }
+            else
+            {
+                _employeesSercvice.AddNew(model);
+            }
+            _employeesSercvice.Commit();
+            return RedirectToAction(nameof(Workers));
         }
     }
 }

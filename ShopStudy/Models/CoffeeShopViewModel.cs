@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopStudy.Models
 {
-    public class CoffeeShopModel
+    public class CoffeeShopViewModel
     {
         public int Id { get; set; }
         public string ProductName { get; set; }
