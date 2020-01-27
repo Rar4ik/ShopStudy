@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopStudy.Infrastructure.Implementation;
 using ShopStudy.Infrastructure.Interfaces;
+using ShopStudy.Models;
 
 namespace ShopStudy
 {
@@ -20,7 +21,8 @@ namespace ShopStudy
         {
             services.AddMvc();
 
-            services.AddSingleton<ICrud, InMemoryWorkerService>();
+            services.AddSingleton<ICrud<WorkerViewModel>, InMemoryWorkerService>();
+            services.AddSingleton<ICrud<CoffeeShopViewModel>, InMemoryCoffeeShop>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +41,7 @@ namespace ShopStudy
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
+            app.UseStaticFiles();
         }
     }
 }

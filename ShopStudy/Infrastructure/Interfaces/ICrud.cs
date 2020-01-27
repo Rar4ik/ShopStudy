@@ -6,12 +6,12 @@ using ShopStudy.Models;
 
 namespace ShopStudy.Infrastructure.Interfaces
 {
-    public interface ICrud
+    public interface ICrud<T>
     {
-        IEnumerable<object> GetAll();
-        object GetById(int id);
+        IEnumerable<T> GetAll();
+        T GetById(int id);
         void Commit();
-        void AddNew(object model);
+        void AddNew(T model);
         void Delete(int id);
     }
 }

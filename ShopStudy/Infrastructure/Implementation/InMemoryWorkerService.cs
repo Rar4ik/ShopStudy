@@ -8,7 +8,7 @@ using ShopStudy.Models;
 
 namespace ShopStudy.Infrastructure.Implementation
 {
-    public class InMemoryWorkerService:ICrud
+    public class InMemoryWorkerService:ICrud<WorkerViewModel>
     {
         private readonly WorkerData _workersData = new WorkerData();
         private readonly List<WorkerViewModel> _workersModels;
@@ -17,12 +17,12 @@ namespace ShopStudy.Infrastructure.Implementation
         {
             _workersModels = _workersData.SendWorkersData();
         }
-        public IEnumerable<object> GetAll()
+        public IEnumerable<WorkerViewModel> GetAll()
         {
             return _workersModels;
         }
 
-        public object GetById(int id)
+        public WorkerViewModel GetById(int id)
         {
             return _workersModels.FirstOrDefault(e => e.Id == id);
         }
@@ -32,9 +32,9 @@ namespace ShopStudy.Infrastructure.Implementation
             //wait for it
         }
 
-        public void AddNew(object model)
+        public void AddNew(WorkerViewModel model)
         {
-            WorkerViewModel workerLocal = model as WorkerViewModel;
+            WorkerViewModel workerLocal = model;
             if (_workersModels.Count == 0)
             {
                 _workersModels.Insert(0, workerLocal);
@@ -42,14 +42,14 @@ namespace ShopStudy.Infrastructure.Implementation
             else
             {
                 workerLocal.Id = _workersModels.Max(e => e.Id) + 1;
-             _workersModels.Add(workerLocal);
+                _workersModels.Add(workerLocal);
             }
 
         }
 
         public void Delete(int id)
         {
-            WorkerViewModel employee = GetById(id) as WorkerViewModel;
+            WorkerViewModel employee = GetById(id);
             if (employee != null)
                 _workersModels.Remove(employee);
         }

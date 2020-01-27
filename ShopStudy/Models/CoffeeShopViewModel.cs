@@ -15,5 +15,10 @@ namespace ShopStudy.Models
         public int ProductSale { get; set; }
         public int ProductRating { get; set; }
         public string Storage { get; set; }
+
+        public CoffeeShopViewModel()
+        {
+                
+        }
     }
 }

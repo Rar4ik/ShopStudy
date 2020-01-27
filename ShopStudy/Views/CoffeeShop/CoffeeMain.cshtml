@@ -3,24 +3,22 @@
     ViewData["Title"] = "CoffeMain";
 }
 
-<!DOCTYPE html>
+<div class="container">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>CoffeMain</title>
-</head>
-<body>
     <header style="color: brown">Coffee Shop with all you favorite flavors</header>
 
     @foreach (var item in Model)
     {
         <ol>
+            <li><a asp-action="CoffeeEdit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a></li>
             <li>@Html.ActionLink(item.ProductName, "CoffeeDetails", new {id = item.Id})</li>
             <li>Sort: @item.ProductCategory</li>
             <li>@item.ProductRating stars</li>
+            <li><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning">Delete</a></li>
         </ol>
     }
-@Html.ActionLink("Вернуться назад", "Index", "Home")
-</body>
-</html>
+</div>
+<div class="container">
+    <a asp-action="Edit" class="btn btn-success">Add</a>
+    @Html.ActionLink("Вернуться назад", "Index", "Home")
+</div>

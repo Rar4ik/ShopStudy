@@ -15,10 +15,10 @@ namespace ShopStudy.Controllers
     {
         //Инициализация
         #region 
-        private ICrud _employeesSercvice;
-        public WorkerController(ICrud crud)
+        private ICrud<WorkerViewModel> _employeesSercvice;
+        public WorkerController(ICrud<WorkerViewModel> crud)
         {
-            _employeesSercvice = (InMemoryWorkerService)crud;
+            _employeesSercvice = crud;
         }
         #endregion
         
@@ -65,7 +65,7 @@ namespace ShopStudy.Controllers
         {
             if (model.Id > 0)
             {
-                var dbItem = _employeesSercvice.GetById(model.Id) as WorkerViewModel;
+                var dbItem = _employeesSercvice.GetById(model.Id);
 
                 if (ReferenceEquals(dbItem, null))
                     return NotFound();

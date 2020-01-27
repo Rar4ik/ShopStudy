@@ -1,17 +1,9 @@
 ﻿@model CoffeeShopViewModel
 @{
-    Layout = null;
+    
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>CoffeeDetails</title>
-</head>
-<body>
-    <table class="table-bordered">
+<div class="container">
+    <table class="table">
         <tr>
             <td>Product name is: </td>
             <td  style="color: brown">@Model.ProductName</td>
@@ -37,8 +29,11 @@
             <td style="color: brown">@Model.Storage</td>
         </tr>
     </table>
+</div>
+<div class="container">
     @Html.ActionLink("Вернуться назад", "CoffeeMain")
 @Html.ActionLink("Вернуться на главную", "Index", "Home")
+</div>
 
-</body>
-</html>
+
+
