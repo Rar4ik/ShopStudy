@@ -31,8 +31,8 @@
     </table>
 </div>
 <div class="container">
-    @Html.ActionLink("Вернуться назад", "CoffeeMain")
-@Html.ActionLink("Вернуться на главную", "Index", "Home")
+    <a asp-action="CoffeeMain" class="btn btn-block">Back to the Coffee main</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-block">Back to the Main page</a>
 </div>
 
 
