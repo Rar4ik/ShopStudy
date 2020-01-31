@@ -1,0 +1,14 @@
+﻿@model List<ShopStudy.Models.BrandViewModel>
+
+<div class="brands_products">
+    <!--brands_products-->
+    <h2>Brands</h2>
+    <div class="brands-name">
+        @foreach (var brand in Model)
+        {
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href=""> <span class="pull-right">(@brand.Amount)</span>@brand.Name.ToLower()</a></li>
+            </ul>
+        }
+    </div>
+</div>

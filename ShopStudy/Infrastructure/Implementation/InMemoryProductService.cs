@@ -235,43 +235,50 @@ namespace ShopStudy.Infrastructure.Implementation
                 {
                     Id = 1,
                     Name = "Acne",
-                    Order = 0
+                    Order = 0,
+                    Amount = 50
                 },
                 new Brand()
                 {
                     Id = 2,
                     Name = "Grüne Erde",
-                    Order = 1
+                    Order = 1,
+                    Amount = 56
                 },
                 new Brand()
                 {
                     Id = 3,
                     Name = "Albiro",
-                    Order = 2
+                    Order = 2,
+                    Amount = 27
                 },
                 new Brand()
                 {
                     Id = 4,
                     Name = "Ronhill",
-                    Order = 3
+                    Order = 3,
+                    Amount = 32
                 },
                 new Brand()
                 {
                     Id = 5,
                     Name = "Oddmolly",
-                    Order = 4
+                    Order = 4,
+                    Amount = 5
                 },
                 new Brand()
                 {
                     Id = 6,
                     Name = "Boudestijn",
-                    Order = 5
+                    Order = 5,
+                    Amount = 9
                 },
                 new Brand()
                 {
                     Id = 7,
                     Name = "Rösch creative culture",
-                    Order = 6
+                    Order = 6,
+                    Amount = 4
                 },
             };
             _products = new List<Product>()
@@ -405,7 +412,7 @@ namespace ShopStudy.Infrastructure.Implementation
 
         public IEnumerable<Brand> GetBrands()
         {
-            throw new NotImplementedException();
+            return _brands;
         }
 
         public IEnumerable<Product> GetProducts(ProductFilter productFilter)

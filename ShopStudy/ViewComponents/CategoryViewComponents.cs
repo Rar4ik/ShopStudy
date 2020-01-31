@@ -42,20 +42,20 @@ namespace ShopStudy.ViewComponents
                     ParentCategories = null
                 });
             }
-            foreach (var CategoryViewModel in parentCategories)
+            foreach (var categoryViewModel in parentCategories)
             {
-                var childCategories = categories.Where(c => c.ParentId == CategoryViewModel.Id);
+                var childCategories = categories.Where(c => c.ParentId == categoryViewModel.Id);
                 foreach (var childCategory in childCategories)
                 {
-                    CategoryViewModel.ChildCategories.Add(new CategoryViewModel()
+                    categoryViewModel.ChildCategories.Add(new CategoryViewModel()
                     {
                         Id = childCategory.Id,
                         Name = childCategory.Name,
                         Order = childCategory.Order,
-                        ParentCategories = CategoryViewModel
+                        ParentCategories = categoryViewModel
                     });
                 }
-                CategoryViewModel.ChildCategories = CategoryViewModel.ChildCategories.OrderBy(c => c.Order).ToList();
+                categoryViewModel.ChildCategories = categoryViewModel.ChildCategories.OrderBy(c => c.Order).ToList();
             }
 
             parentCategories = parentCategories.OrderBy(c => c.Order).ToList();
