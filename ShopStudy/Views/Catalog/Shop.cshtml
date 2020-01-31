@@ -1,0 +1,29 @@
+﻿@model CatalogViewModel
+@{
+    ViewData["Title"] = "Products";
+}
+<section id="advertisement">
+	<div class="container">
+		<img src="~/images/shop/advertisement.jpg" alt="" />
+	</div>
+</section>
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="left-sidebar">
+                    <vc:Category></vc:Category>
+
+                    @await Html.PartialAsync("Partial/_BrandProductsPartial")
+
+					@await Html.PartialAsync("Partial/_PriceRangePartial")
+
+					@await Html.PartialAsync("Partial/_ShippingPartial")
+
+				</div>
+			</div>
+			@await Html.PartialAsync("Partial/_ProductItems", Model.Products)
+		</div>
+	</div>
+</section>

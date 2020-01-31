@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -12,8 +12,8 @@
     <None Include="Views\ClothesShop\ContactUs.cshtml" />
     <None Include="Views\ClothesShop\Login.cshtml" />
     <None Include="Views\ClothesShop\NotFoundAction.cshtml" />
-    <None Include="Views\ClothesShop\ProductDetails.cshtml" />
-    <None Include="Views\ClothesShop\Shop.cshtml" />
+    <None Include="Views\Catalog\ProductDetails.cshtml" />
+    <None Include="Views\Catalog\Shop.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +21,10 @@
     <PackageReference Include="EntityFramework" Version="6.4.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopStudy.Domain\ShopStudy.Domain.csproj" />
   </ItemGroup>
 
 </Project>

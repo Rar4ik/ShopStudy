@@ -63,6 +63,8 @@ namespace ShopStudy.Controllers
         [Route("Edit/{id?}")]
         public IActionResult Edit(WorkerViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View();
             if (model.Id > 0)
             {
                 var dbItem = _employeesSercvice.GetById(model.Id);
