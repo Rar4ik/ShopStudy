@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ShopStudy.Infrastructure.Interfaces;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using ShopStudy.NewDomain.Entities;
-using ShopStudy.NewDomain.FIlters;
 
-namespace ShopStudy.Infrastructure.Implementation
+namespace ShopStudy.Dal
 {
-    public class InMemoryProductService : IProductService
+    public class DbInitializer
     {
-        private readonly List<Category> _categories;
-        private readonly List<Brand> _brands;
-        private readonly List<Product> _products;
-
-        public InMemoryProductService()
+        public static void Initializer(ShopStudyContext context)
         {
-            _categories = new List<Category>()
+            if (context.Products.Any())
+                return;
+            var categories = new List<Category>()
             {
                 new Category()
                 {
@@ -229,7 +226,19 @@ namespace ShopStudy.Infrastructure.Implementation
                     ParentId = null
                 }
             };
-            _brands = new List<Brand>()
+            using (var trans = context.Database.BeginTransaction())
+            {
+                foreach (var section in categories)
+                {
+                    context.Categories.Add(section);
+                }
+
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Categories] ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Categories] OFF");
+                trans.Commit();
+            }
+            var brands = new List<Brand>()
             {
                 new Brand()
                 {
@@ -281,7 +290,19 @@ namespace ShopStudy.Infrastructure.Implementation
                     Amount = 4
                 },
             };
-            _products = new List<Product>()
+            using (var trans = context.Database.BeginTransaction())
+            {
+                foreach (var brand in brands)
+                {
+                    context.Brands.Add(brand);
+                }
+
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Brands] ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Brands] OFF");
+                trans.Commit();
+            }
+            var products = new List<Product>()
             {
                 new Product()
                 {
@@ -404,26 +425,17 @@ namespace ShopStudy.Infrastructure.Implementation
                     BrandId = 3
                 },
             };
-        }
-        public IEnumerable<Category> GetCategories()
-        {
-            return _categories;
-        }
-
-        public IEnumerable<Brand> GetBrands()
-        {
-            return _brands;
-        }
-
-        public IEnumerable<Product> GetProducts(ProductFilter productFilter)
-        {
-            var products = _products;
-
-            if (productFilter.CategoryId.HasValue)
-                products = products.Where(p => p.CategoryId.Equals(productFilter.CategoryId)).ToList();
-            if (productFilter.BrandId.HasValue)
-                products = products.Where(p => p.BrandId.Equals(productFilter.BrandId)).ToList();
-            return products;
+            using (var trans = context.Database.BeginTransaction())
+            {
+                foreach (var product in products)
+                {
+                    context.Products.Add(product);
+                }
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] OFF");
+                trans.Commit();
+            }
         }
     }
 }

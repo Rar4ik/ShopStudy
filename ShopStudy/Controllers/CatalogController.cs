@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShopStudy.Infrastructure.Interfaces;
 using ShopStudy.Models;
-using WebStore.Domain.FIlters;
+using ShopStudy.NewDomain.FIlters;
 
 namespace ShopStudy.Controllers
 {

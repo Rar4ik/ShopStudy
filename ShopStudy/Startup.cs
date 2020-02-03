@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopStudy.Infrastructure.Implementation;
 using ShopStudy.Infrastructure.Interfaces;
 using ShopStudy.Models;
+using ShopStudy.Dal;
 
 namespace ShopStudy
 {
@@ -27,10 +30,12 @@ namespace ShopStudy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            services.AddDbContext<ShopStudyContext>(options => options
+                .UseSqlServer(_configuration
+                .GetConnectionString("DefaultConnection")));
             services.AddSingleton<ICrud<WorkerViewModel>, InMemoryWorkerService>();
             services.AddSingleton<ICrud<CoffeeShopViewModel>, InMemoryCoffeeShop>();
-            services.AddSingleton<IProductService, InMemoryProductService>();
+            services.AddScoped<IProductService, SqlProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
