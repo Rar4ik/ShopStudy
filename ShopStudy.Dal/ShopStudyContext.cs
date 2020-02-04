@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ShopStudy.NewDomain.Entities;
 
 namespace ShopStudy.Dal
 {
-    public class ShopStudyContext : DbContext
+    public class ShopStudyContext : IdentityDbContext<User>
     {
         public ShopStudyContext(DbContextOptions options) : base(options)
         {

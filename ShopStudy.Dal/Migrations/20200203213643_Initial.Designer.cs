@@ -10,7 +10,7 @@ using ShopStudy.Dal;
 namespace ShopStudy.Dal.Migrations
 {
     [DbContext(typeof(ShopStudyContext))]
-    [Migration("20200203181020_Initial")]
+    [Migration("20200203213643_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

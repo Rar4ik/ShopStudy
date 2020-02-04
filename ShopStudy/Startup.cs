@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ using ShopStudy.Infrastructure.Implementation;
 using ShopStudy.Infrastructure.Interfaces;
 using ShopStudy.Models;
 using ShopStudy.Dal;
+using ShopStudy.NewDomain.Entities;
 
 namespace ShopStudy
 {
@@ -36,6 +38,14 @@ namespace ShopStudy
             services.AddSingleton<ICrud<WorkerViewModel>, InMemoryWorkerService>();
             services.AddSingleton<ICrud<CoffeeShopViewModel>, InMemoryCoffeeShop>();
             services.AddScoped<IProductService, SqlProductService>();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ShopStudyContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +57,9 @@ namespace ShopStudy
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+
 
             app.UseEndpoints(endpoints =>
             {
