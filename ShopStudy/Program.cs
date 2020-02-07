@@ -26,7 +26,8 @@ namespace ShopStudy
                 try
                 {
                     ShopStudyContext context = services.GetRequiredService<ShopStudyContext>();
-                    DbInitializer.Initializer(context); 
+                    DbInitializer.Initializer(context);
+                    DbInitializer.InitializeUsers(services);
                 }
                 catch (Exception ex)
                 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopStudy.Data;
 using ShopStudy.Infrastructure.Implementation;
@@ -11,6 +12,7 @@ using ShopStudy.Models;
 namespace ShopStudy.Controllers
 {
     [Route("Employees")]
+    [Authorize]
     public class WorkerController : Controller
     {
         //Инициализация
@@ -42,6 +44,7 @@ namespace ShopStudy.Controllers
 
         [HttpGet]
         [Route("Edit/{id?}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int? id)
         {
             if (!id.HasValue)
@@ -54,6 +57,7 @@ namespace ShopStudy.Controllers
 
         [HttpGet]
         [Route("Delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             _employeesSercvice.Delete(id);
@@ -61,6 +65,7 @@ namespace ShopStudy.Controllers
         }
         [HttpPost]
         [Route("Edit/{id?}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(WorkerViewModel model)
         {
             if (!ModelState.IsValid)

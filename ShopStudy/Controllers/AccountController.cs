@@ -81,6 +81,7 @@ namespace ShopStudy.Controllers
             }
 
             await _signInManager.SignInAsync(newUser, false);
+            await _userManager.AddToRoleAsync(newUser, "User");
             return RedirectToAction("Index", "Home");
         }
     }

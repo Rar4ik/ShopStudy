@@ -37,9 +37,21 @@ namespace ShopStudy.Controllers
             return View(model);
         }
 
-        public IActionResult ProductDetails()
+        public IActionResult ProductDetail(int id)
         {
-            return View();
+            var products = _productService.GetProductById(id);
+            if (products == null)
+                return NotFound();
+            var model = new ProductViewModel()
+            {
+                Id = products.Id,
+                ImageURL = products.ImageUrl,
+                Name = products.Name,
+                Order = products.Order,
+                Price = products.Price,
+                Brand = products.Brand?.Name ?? string.Empty
+            };
+            return View(model);
         }
     }
 }

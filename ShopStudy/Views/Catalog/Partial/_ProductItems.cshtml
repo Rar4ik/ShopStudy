@@ -12,18 +12,28 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <img src="~/images/home/@product.ImageURL" alt="" />
+                            <a asp-controller="Catalog" asp-action="ProductDetail" asp-route-id="@product.Id">
+                                <img src="~/images/home/@product.ImageURL" alt=""/>
+                            </a>
                             <h2>@product.Price.ToString("C")</h2>
                             <p>@product.Name</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <a 
+                                asp-controller="Carts"
+                                asp-action="AddToCart"
+                                asp-route-id="@product.Id"
+                                asp-route-returnUrl="@Context.Request.Path" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
-                        <div class="product-overlay">
+                        @*<div class="product-overlay">
                             <div class="overlay-content">
                                 <h2>@product.Price.ToString("C")</h2>
                                 <p>@product.Name</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a 
+                                    asp-controller="Carts"
+                                    asp-action="AddToCart"
+                                    asp-route-id="@product.Id"
+                                    asp-route-returnUrl="@Context.Request.Path" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
                 <div class="choose">

@@ -39,6 +39,11 @@ namespace ShopStudy.Infrastructure.Implementation
 
             return query.ToList();
         }
+
+        public Product GetProductById(int id)
+        {
+            return _context.Products.FirstOrDefault(x => x.Id == id);
+        }
     }
 }
 

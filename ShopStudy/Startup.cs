@@ -41,6 +41,8 @@ namespace ShopStudy
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ShopStudyContext>()
                 .AddDefaultTokenProviders();
+            services.AddScoped<ICartService, CookieCartService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -59,7 +61,7 @@ namespace ShopStudy
             app.UseRouting();
 
             app.UseAuthentication();
-
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

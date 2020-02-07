@@ -13,5 +13,6 @@ namespace ShopStudy.Models
         public int Order { get; set; }
         public string ImageURL { get; set; }
         public decimal Price { get; set; }
+        public string Brand { get; set; }
     }
 }

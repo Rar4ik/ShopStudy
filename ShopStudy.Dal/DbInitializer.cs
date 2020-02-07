@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using ShopStudy.NewDomain.Entities;
 
 namespace ShopStudy.Dal
@@ -436,6 +440,39 @@ namespace ShopStudy.Dal
                 context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Products] OFF");
                 trans.Commit();
             }
+        }
+
+        public static void InitializeUsers(IServiceProvider services)
+        {
+            var roleManager = services.GetService<RoleManager<IdentityRole>>();
+            EnsureRole(roleManager, "User");
+            EnsureRole(roleManager, "Admin");
+
+            EnsureToRoleUser(services, "Admin", "Admin", "Admin@123");
+        }
+
+        private static void EnsureToRoleUser(IServiceProvider services, string userName, string roleName, string userPassword)
+        {
+            var userManager = services.GetService<UserManager<User>>();
+            var users = services.GetService<IUserStore<User>>();
+
+            if(users.FindByNameAsync(userName, CancellationToken.None).Result != null)
+            {
+                return;
+            }
+            var admin = new User
+            {
+                UserName = userName,
+                Email = $"{userName}@domain.com"
+            };
+            if (userManager.CreateAsync(admin, userPassword).Result.Succeeded)
+                userManager.AddToRoleAsync(admin, roleName).Wait();
+        }
+
+        private static void EnsureRole(RoleManager<IdentityRole> roleManager, string roleName)
+        {
+            if (!roleManager.RoleExistsAsync(roleName).Result)
+                roleManager.CreateAsync(new IdentityRole(roleName)).Wait();
         }
     }
 }
